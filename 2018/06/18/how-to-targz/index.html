@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="확장자 tar는 압축없이 여러 파일들은 한 파일로 묶은 것(archive)을 의미하고 tar.gz는 아카이빙 한 tar 파일을 gunzip으로 압축한 것을 말한다. 압축하기tar -c [options] [&amp;lt;file&amp;gt; | &amp;lt;dir&amp;gt;] 압축시 기본적으로 -c옵션을 사용하며 정확히는 압축이 아니라 단순히 하나의 파일로 묶기만 한다. 추가 옵">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="리눅스 tar.gz 압축&#x2F;해제 명령어">
+<meta property="og:url" content="https://blog.donizb.com/2018/06/18/how-to-targz/index.html">
+<meta property="og:site_name" content="donizb&#39;s blog">
+<meta property="og:description" content="확장자 tar는 압축없이 여러 파일들은 한 파일로 묶은 것(archive)을 의미하고 tar.gz는 아카이빙 한 tar 파일을 gunzip으로 압축한 것을 말한다. 압축하기tar -c [options] [&amp;lt;file&amp;gt; | &amp;lt;dir&amp;gt;] 압축시 기본적으로 -c옵션을 사용하며 정확히는 압축이 아니라 단순히 하나의 파일로 묶기만 한다. 추가 옵">
+<meta property="og:locale" content="ko">
+<meta property="og:updated_time" content="2018-11-17T07:28:02.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="리눅스 tar.gz 압축&#x2F;해제 명령어">
+<meta name="twitter:description" content="확장자 tar는 압축없이 여러 파일들은 한 파일로 묶은 것(archive)을 의미하고 tar.gz는 아카이빙 한 tar 파일을 gunzip으로 압축한 것을 말한다. 압축하기tar -c [options] [&amp;lt;file&amp;gt; | &amp;lt;dir&amp;gt;] 압축시 기본적으로 -c옵션을 사용하며 정확히는 압축이 아니라 단순히 하나의 파일로 묶기만 한다. 추가 옵">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>리눅스 tar.gz 압축/해제 명령어</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/10/24/bowl-of-the-leader/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.donizb.com/2018/06/18/how-to-targz/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.donizb.com/2018/06/18/how-to-targz/&text=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.donizb.com/2018/06/18/how-to-targz/&is_video=false&description=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=리눅스 tar.gz 압축/해제 명령어&body=Check out this article: https://blog.donizb.com/2018/06/18/how-to-targz/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.donizb.com/2018/06/18/how-to-targz/&name=리눅스 tar.gz 압축/해제 명령어&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#압축하기"><span class="toc-number">1.</span> <span class="toc-text">압축하기</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#예제"><span class="toc-number">1.1.</span> <span class="toc-text">예제</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#압축풀기"><span class="toc-number">2.</span> <span class="toc-text">압축풀기</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#예제-1"><span class="toc-number">2.1.</span> <span class="toc-text">예제</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#옵션-정리"><span class="toc-number">3.</span> <span class="toc-text">옵션 정리</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        리눅스 tar.gz 압축/해제 명령어
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">donizb's blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-06-18T12:40:43.000Z" itemprop="datePublished">2018-06-18</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>확장자 tar는 압축없이 여러 파일들은 한 파일로 묶은 것(archive)을 의미하고 tar.gz는 아카이빙 한 tar 파일을 gunzip으로 압축한 것을 말한다.</p>
+<h3 id="압축하기"><a href="#압축하기" class="headerlink" title="압축하기"></a>압축하기</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -c [options] [&lt;file&gt; | &lt;dir&gt;]</span><br></pre></td></tr></table></figure>
+<p>압축시 기본적으로 <code>-c</code>옵션을 사용하며 정확히는 압축이 아니라 단순히 하나의 파일로 묶기만 한다. 추가 옵션으로 <code>-z</code> 를 사용하게 되면 tar로 묶은 것을 gunzip으로 압축한다. (추가로 bzip2/xz/lzma형식의 압축을 사용하고 싶다면 <code>-j</code>,<code>-J</code>,<code>--lzma</code> 옵션을 사용하면 된다.) 압축과 압축해제시 <code>-f</code> 옵션과 <code>-v</code> 옵션을 함께 많이 쓰이는데 <code>-f</code> 는 아카이브의 이름을 지정하는 것이므로 꼭 명시해야 한다. <code>-v</code> 옵션은 아카이브에 추가되거나 풀리고 있는 파일들의 진행사항들을 알려준다.</p>
+<h4 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h4><ul>
+<li>exmple폴더의 내용을 example.tar로 묶는다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -cf example.tar example/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>example폴더의 내용을 진행사항을 화면에 표시하며 example.tar로 묶는다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -cvf example.tar example/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>example폴더의 내용을 진행사항을 화면에 표시하며 tar로 묶고 gunzip으로 압축한다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -cvzf example.tar.gz example/</span><br></pre></td></tr></table></figure>
+<h3 id="압축풀기"><a href="#압축풀기" class="headerlink" title="압축풀기"></a>압축풀기</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -x [options]</span><br></pre></td></tr></table></figure>
+<p>압축을 풀때는 <code>-x</code> 옵션을 사용하여 압축을 푼다. 이것 역시 마찬가지로 tar로 묶은 파일을 말하며 gunzip으로 된 압축파일을 풀때에는 압축할때와 마찬가지로 <code>-z</code> 를 추가해야 한다. </p>
+<h4 id="예제-1"><a href="#예제-1" class="headerlink" title="예제"></a>예제</h4><ul>
+<li><p>example.tar로 묶어진 파일을 푼다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -xf example.tar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>example.tar  파일을 진행사항을 화면에 표시하며 푼다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -xvf example.tar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>example.tar.gz으로 압축된 파일을 진행사항을 화면에 표시하며 푼다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -xvzf example.tar</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="옵션-정리"><a href="#옵션-정리" class="headerlink" title="옵션 정리"></a>옵션 정리</h3><ul>
+<li>-f : 원하는 압축 파일명</li>
+<li>-c : 지정한 파일을 tar로 묶음</li>
+<li>-x : 압축 해제</li>
+<li>-r : 묶인 tar에 새 파일을 추가</li>
+<li>-t : tar 안에 들어있는 파일을 목록으로 표시</li>
+<li>-v : 압축 및 해제 과정을 상세한 메시지로 출력</li>
+<li>-z : 묶은 tar를 gzip으로 압축</li>
+<li>-j : 묶은 tar를 bzip2로 압축</li>
+<li>-J : 묶은 tar를 xz로 압축</li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#압축하기"><span class="toc-number">1.</span> <span class="toc-text">압축하기</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#예제"><span class="toc-number">1.1.</span> <span class="toc-text">예제</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#압축풀기"><span class="toc-number">2.</span> <span class="toc-text">압축풀기</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#예제-1"><span class="toc-number">2.1.</span> <span class="toc-text">예제</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#옵션-정리"><span class="toc-number">3.</span> <span class="toc-text">옵션 정리</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.donizb.com/2018/06/18/how-to-targz/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.donizb.com/2018/06/18/how-to-targz/&text=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.donizb.com/2018/06/18/how-to-targz/&is_video=false&description=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=리눅스 tar.gz 압축/해제 명령어&body=Check out this article: https://blog.donizb.com/2018/06/18/how-to-targz/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.donizb.com/2018/06/18/how-to-targz/&title=리눅스 tar.gz 압축/해제 명령어"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.donizb.com/2018/06/18/how-to-targz/&name=리눅스 tar.gz 압축/해제 명령어&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 donizb
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'donizb';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

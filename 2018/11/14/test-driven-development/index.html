@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="최근 개발을 다시하게 되어 끄적이듯 코딩을 하고 있는데 TDD로 개발을 하고 싶은 욕구가 샘솟았다. 개발을 테스트 코드를 작성하면서 목적하는 프로그램을 완성해 나간다는 개발 방법론인데.. 참 그럴듯하고 멋지게 코드가 완성될 거 같은데 좀처럼 TDD로 개발한다는 것이 감이 잡히지 않아 예전에 시도했다가 포기했었는데 이번에는 포기하지 않으리라 다짐하며 최근에">
+<meta name="keywords" content="book">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[책리뷰] 테스트 주도 개발">
+<meta property="og:url" content="https://blog.donizb.com/2018/11/14/test-driven-development/index.html">
+<meta property="og:site_name" content="donizb&#39;s blog">
+<meta property="og:description" content="최근 개발을 다시하게 되어 끄적이듯 코딩을 하고 있는데 TDD로 개발을 하고 싶은 욕구가 샘솟았다. 개발을 테스트 코드를 작성하면서 목적하는 프로그램을 완성해 나간다는 개발 방법론인데.. 참 그럴듯하고 멋지게 코드가 완성될 거 같은데 좀처럼 TDD로 개발한다는 것이 감이 잡히지 않아 예전에 시도했다가 포기했었는데 이번에는 포기하지 않으리라 다짐하며 최근에">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://blog.donizb.com/images/test-driven-development.jpg">
+<meta property="og:updated_time" content="2018-11-17T08:18:58.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[책리뷰] 테스트 주도 개발">
+<meta name="twitter:description" content="최근 개발을 다시하게 되어 끄적이듯 코딩을 하고 있는데 TDD로 개발을 하고 싶은 욕구가 샘솟았다. 개발을 테스트 코드를 작성하면서 목적하는 프로그램을 완성해 나간다는 개발 방법론인데.. 참 그럴듯하고 멋지게 코드가 완성될 거 같은데 좀처럼 TDD로 개발한다는 것이 감이 잡히지 않아 예전에 시도했다가 포기했었는데 이번에는 포기하지 않으리라 다짐하며 최근에">
+<meta name="twitter:image" content="https://blog.donizb.com/images/test-driven-development.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>[책리뷰] 테스트 주도 개발</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/11/17/power-of-self-confidence/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/10/24/bowl-of-the-leader/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.donizb.com/2018/11/14/test-driven-development/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.donizb.com/2018/11/14/test-driven-development/&text=[책리뷰] 테스트 주도 개발"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.donizb.com/2018/11/14/test-driven-development/&is_video=false&description=[책리뷰] 테스트 주도 개발"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[책리뷰] 테스트 주도 개발&body=Check out this article: https://blog.donizb.com/2018/11/14/test-driven-development/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.donizb.com/2018/11/14/test-driven-development/&name=[책리뷰] 테스트 주도 개발&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        [책리뷰] 테스트 주도 개발
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">donizb's blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-11-14T08:18:06.000Z" itemprop="datePublished">2018-11-14</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/book/">book</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/images/test-driven-development.jpg" alt=""><br>최근 개발을 다시하게 되어 끄적이듯 코딩을 하고 있는데 TDD로 개발을 하고 싶은 욕구가 샘솟았다. 개발을 테스트 코드를 작성하면서 목적하는 프로그램을 완성해 나간다는 개발 방법론인데.. 참 그럴듯하고 멋지게 코드가 완성될 거 같은데 좀처럼 TDD로 개발한다는 것이 감이 잡히지 않아 예전에 시도했다가 포기했었는데 이번에는 포기하지 않으리라 다짐하며 최근에 좋은 책이 뭐가 있을까 검색해 보았다. 요새 출판되는 TDD 책은 좀처럼 보이질 않았고 년도는 좀 되었지만 켄트백이 저술한 테스트 주도 개발이라는 책을 사람들이 많이 추천하고 있길래 도서관에서 빌려 읽었다. (우리동네 도서관에 책이 없어 옆동네 도서관에서 상호대차까지했다.)</p>
+<p>책 구성은 의외로 심플했는데 1부에서는 화폐 예제로 따라하는 TDD, 2부는 xUnit을 개발, 3부는 각종 유용한 패턴들에 대한 설명들이다. 책의 구성과 내용은 좋았는데 읽기 쉬우면서도 감이 잘 잡히지 않는 것은 내공이 부족해서겠지.. 결국은 객체지향적인 사고와 디자인패턴에 대한 숙련도가 있어야 TDD를 어느정도 잘 할 수 있다는 결론에 이르렀다.</p>
+<p>책을 처음 펼쳤을때는 이 책만 읽으면 나도 TDD를 할 수 있으리라 생각했지만.. 나의 부족함을 느끼고 자기성찰을 하게 되었다는 이야기.</p>
+<p>별 4.</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.donizb.com/2018/11/14/test-driven-development/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.donizb.com/2018/11/14/test-driven-development/&text=[책리뷰] 테스트 주도 개발"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.donizb.com/2018/11/14/test-driven-development/&is_video=false&description=[책리뷰] 테스트 주도 개발"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[책리뷰] 테스트 주도 개발&body=Check out this article: https://blog.donizb.com/2018/11/14/test-driven-development/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.donizb.com/2018/11/14/test-driven-development/&title=[책리뷰] 테스트 주도 개발"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.donizb.com/2018/11/14/test-driven-development/&name=[책리뷰] 테스트 주도 개발&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 donizb
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'donizb';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
